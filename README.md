@@ -1,15 +1,23 @@
 # Universe - Remote iPad Setup
 
+> [iPadOS](https://www.apple.com/ipados/ipados-preview/) is recommended for best support in Safari
+> Create a short cut on your home screen for full screen support
+
+## Features:
+
+* Provisioning of worker node on [Scaleway](https://www.scaleway.com) 
+* [VS Code Remote Server](https://github.com/cdr/code-server) configured with [Let's Encrypt](https://letsencrypt.org/)
+* Prepared for @golang
+
 ## Remote Worker
+
+A worker node is created and provisioned with [bootstrap.sh](/bootstrap.sh). You can access this node using you provided `private_key`.
 
 ### Setup
 
 ```
 # init the state
 terraform init
-
-# conduct plan
-terraform plan
 
 # apply
 terraform apply

@@ -7,15 +7,6 @@ data "scaleway_image" "docker" {
   name         = "Docker"
 }
 
-data "template_file" "traefik_config" {
-  template = "${file("${path.root}/files/traefik.toml.tpl")}"
-
-  vars {
-    email       = "${var.traefik_email}"
-    domain      = "${var.traefik_domain}"
-  }
-}
-
 resource "scaleway_security_group" "worker" {
   name        = "Default Worker Security Group"
   description = "This is the security group for the worker"
@@ -62,13 +53,7 @@ resource "scaleway_server" "worker" {
 
   provisioner "remote-exec" {
     inline = [
-      "curl -fsSL https://raw.githubusercontent.com/katallaxie/universe/master/bootstrap.sh | sudo bash",
-      "shutdown -r now"
+      "curl -fsSL https://raw.githubusercontent.com/katallaxie/universe/master/bootstrap.sh | sudo bash -s -- yes yes yes ${var.acme_domain} ${var.acme_email}"
     ]
-  }
-
-  provisioner "file" {
-    content     = "${data.template_file.traefik_config.rendered}"
-    destination = "/"
   }
 }

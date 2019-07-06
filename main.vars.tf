@@ -17,18 +17,18 @@ variable "dynamic_ip" {
   description = "Enabling public_ip"
 }
 
-variable "traefik_email" {
-  default     = "admin@acme"
-  description = "Default email address to use for ACME"
+variable "acme_domain" {
+  default     = ""
+  description = "Default domain for certbot"
 }
 
-variable "traefik_domain" {
-  default     = "acme"
-  description = "Default domain for traefik"
+variable "acme_email" {
+  default     = ""
+  description = "Default email for certbot"
 }
 
 variable "worker_tcp_ports" {
-  default = [22, 443]
+  default = [22, 80, 443]
 }
 
 variable "archs" {
