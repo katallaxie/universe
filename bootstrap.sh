@@ -172,6 +172,7 @@ Group=coder
 WorkingDirectory=/home/coder
 Environment="PASSWORD=${PASS}"
 ExecStart=/usr/local/bin/code-server -p 8443 --allow-http --user-data-dir /home/coder
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
