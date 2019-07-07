@@ -144,6 +144,7 @@ fi
 if [ "${CERTBOT}" != "no" ]; then
   echo "==> Creating certificate ..."
   sudo certbot --nginx -n --agree-tos --email ${CERTBOT_EMAIL} -d ${CERTBOT_DOMAIN}
+  sudo certbot enhance --nginx -n --redirect -d ${CERTBOT_DOMAIN} --cert-name ${CERTBOT_DOMAIN}
   sudo sed -i "s/try_files.*/proxy_pass http:\/\/localhost:8443;\nproxy_http_version 1.1;\nproxy_set_header Upgrade \$http_upgrade;proxy_set_header Connection \"Upgrade\";/g" /etc/nginx/sites-available/default
   sudo service nginx restart
 fi
